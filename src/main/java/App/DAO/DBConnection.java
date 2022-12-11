@@ -1,4 +1,4 @@
-package App.dbConnection;
+package App.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,10 +12,16 @@ public class DBConnection {
     private  static  final String DBPassword="";
     private  static Connection connection;
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
         //jdbc:mysql://localhost:3306/jdbc
-        connection= DriverManager.getConnection(String.format("jdbc:mysql://%s:%d/%s",Host,port,DBName),DBuserName,DBPassword);
-    return  connection;
+        try {
+            connection= DriverManager.getConnection(String.format("jdbc:mysql://%s:%d/%s",Host,port,DBName),DBuserName,DBPassword);
+
+        }
+        catch (Exception ex){
+            ex.getMessage();
+        }
+        return  connection;
     }
 
 }
